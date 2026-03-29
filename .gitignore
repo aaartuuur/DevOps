@@ -1,0 +1,7 @@
+devops-practice1-docker-compose/.env
+devops-practice1-docker-compose/**/.env
+devops-practice1-docker-compose/**/node_modules/
+devops-practice1-docker-compose/**/dist/
+devops-practice1-docker-compose/**/target/
+devops-practice1-docker-compose/**/__pycache__/
+devops-practice1-docker-compose/**/.DS_Store
