@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: practice3-app
+  namespace: practice3
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: practice3-app
+  template:
+    metadata:
+      labels:
+        app: practice3-app
+    spec:
+      containers:
+        - name: practice3-app
+          image: artur303/k8s-practice3:1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:
+            - name: NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: practice3-app-config
+                  key: NAME
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: practice3-app-config
+                  key: DB_HOST
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: practice3-app-config
+                  key: DB_PORT
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: practice3-app-config
+                  key: DB_NAME
+            - name: DB_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: practice3-app-config
+                  key: DB_USER
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: practice3-postgres-secret
+                  key: POSTGRES_PASSWORD
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: practice3-app-config
+  namespace: practice3
+data:
+  NAME: "artur"
+  DB_HOST: "practice3-postgres"
+  DB_PORT: "5432"
+  DB_NAME: "appdb"
+  DB_USER: "appuser"

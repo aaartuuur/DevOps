@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: practice3-app
+  namespace: practice3
+spec:
+  type: ClusterIP
+  selector:
+    app: practice3-app
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
