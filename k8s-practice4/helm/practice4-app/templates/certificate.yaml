@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ include "practice4.fullname" . }}-certificate
+  labels:
+    {{- include "practice4.labels" . | nindent 4 }}
+spec:
+  secretName: {{ .Values.gateway.tlsSecretName }}
+  issuerRef:
+    name: {{ .Values.certificate.issuerName }}
+    kind: Issuer
+  commonName: {{ .Values.certificate.commonName | quote }}
+  dnsNames:
+    - {{ .Values.gateway.host | quote }}

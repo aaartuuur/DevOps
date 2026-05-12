@@ -1,0 +1,40 @@
+nameOverride: ""
+fullnameOverride: "practice4"
+
+replicaCount: 2
+
+image:
+  repository: artur303/k8s-practice4
+  tag: "1.0"
+  pullPolicy: IfNotPresent
+
+app:
+  name: "artur"
+  port: 8080
+
+service:
+  type: ClusterIP
+  port: 80
+
+postgres:
+  clusterName: practice4-postgres
+  database: appdb
+  user: appuser
+  password: apppassword
+  instances: 1
+  storageSize: 1Gi
+
+gateway:
+  className: practice4-eg
+  host: practice4.localhost
+  httpPort: 80
+  httpsPort: 443
+  tlsSecretName: practice4-tls
+
+certificate:
+  issuerName: practice4-selfsigned-issuer
+  commonName: practice4.localhost
+
+serviceAccount:
+  create: true
+  name: practice4-app

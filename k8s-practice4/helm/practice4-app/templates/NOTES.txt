@@ -1,0 +1,18 @@
+Practice 4 has been installed.
+
+Application URL:
+
+  https://{{ .Values.gateway.host }}
+
+Check resources:
+
+  kubectl get pods -n {{ .Release.Namespace }}
+  kubectl get cluster -n {{ .Release.Namespace }}
+  kubectl get certificate -n {{ .Release.Namespace }}
+  kubectl get gateway -n {{ .Release.Namespace }}
+  kubectl get httproute -n {{ .Release.Namespace }}
+
+Check database rows:
+
+  kubectl exec -n {{ .Release.Namespace }} {{ .Values.postgres.clusterName }}-1 -- psql -U {{ .Values.postgres.user }} -d {{ .Values.postgres.database }} -c "SELECT * FROM visits ORDER BY id DESC LIMIT 10;"
+  

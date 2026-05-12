@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "practice4.fullname" . }}-app
+  labels:
+    {{- include "practice4.labels" . | nindent 4 }}
+    app.kubernetes.io/component: app
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: app
+  ports:
+    - name: http
+      port: {{ .Values.service.port }}
+      targetPort: http

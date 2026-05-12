@@ -1,0 +1,6 @@
+apiVersion: v2
+name: practice4-app
+description: Helm chart for Kubernetes practice 4 with Gateway API, CloudNativePG and cert-manager
+type: application
+version: 0.1.0
+appVersion: "1.0"

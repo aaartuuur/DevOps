@@ -1,0 +1,19 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: {{ .Values.postgres.clusterName }}
+  labels:
+    {{- include "practice4.labels" . | nindent 4 }}
+    app.kubernetes.io/component: postgres
+spec:
+  instances: {{ .Values.postgres.instances }}
+
+  bootstrap:
+    initdb:
+      database: {{ .Values.postgres.database }}
+      owner: {{ .Values.postgres.user }}
+      secret:
+        name: {{ include "practice4.fullname" . }}-db-secret
+
+  storage:
+    size: {{ .Values.postgres.storageSize }}
